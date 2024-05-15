@@ -5,12 +5,10 @@
         <!-- /sidebar -->
 
         <div class="flex-1">
-            <header class="h-8 shadow bg-white">
-                Header
-            </header>
+            <TopHeader></TopHeader>
 
             <!-- content -->
-            <main>
+            <main class="p-6">
                 <router-view></router-view>
             </main>
             <!-- /content -->
@@ -20,6 +18,7 @@
 
 <script setup>
     import Sidebar from "./Sidebar.vue";
+    import TopHeader from "./TopHeader.vue";
 
     const {title} = defineProps({
         title: String,
