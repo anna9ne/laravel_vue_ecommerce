@@ -11,7 +11,7 @@
         <div class="flex justify-between border-b-2 pb-3">
             <div class="flex items-center">
                 <span class="whitespace-nowrap mr-3">Per Page</span>
-                <select @change="getProducts(null)" v-model="perPage"
+                <select @change="getProducts1(null)" v-model="perPage"
                         class="appearance-none relative block w-24 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
                     <option value="5">5</option>
                     <option value="10">10</option>
@@ -21,7 +21,7 @@
                 </select>
             </div>
             <div>
-                <input v-model="search" @change="getProducts(null)"
+                <input v-model="search" @change="getProducts1(null)"
                        class="appearance-none relative block w-48 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                        placeholder="Type to Search products">
             </div>
@@ -63,6 +63,27 @@
 </template>
 
 <script setup>
+
+import {computed, onMounted, ref} from "vue";
+import store from "../store/index.js";
+import {getProducts} from "../store/actions.js";
+import Spinner from "../components/core/Spinner.vue";
+import {PRODUCTS_PER_PAGE} from "../constants.js";
+
+const perPage = ref(PRODUCTS_PER_PAGE)
+const search = ref('')
+const products = computed(() => store.state.products)
+
+onMounted(() => {
+    getProducts1();
+})
+
+function getProducts1() {
+    store.dispatch('getProducts')
+}
+
+//store.dispatch('getProducts')
+
 
 </script>
 
